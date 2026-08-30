@@ -17,14 +17,15 @@ def load_words(filename: str) -> Dict[str, str]:
     try:
         with open(filename, "r", encoding="utf-8") as file:
             for row in file:
-                clear_whitespace = row.strip()
-                if "," in clear_whitespace:
-                    words = clear_whitespace.split(",", 1)
+                line = row.strip()
+                if "," in line:
+                    parts = line.split(",", 1)
 
-                    if len(words) == 2:
-                        word = words[0]
-                        translation = words[1]
-                        dictionary[word] = translation
+                    if len(parts) == 2:
+                        word = parts[0].strip()
+                        translation = parts[1].strip()
+                        if word and translation:
+                            dictionary[word] = translation
         return dictionary
 
     except FileNotFoundError:
@@ -38,14 +39,16 @@ def print_statistics(score: int, total_time: float) -> None:
     колличество правильных ответов и время
     """
     print(f"Ваш итоговый счёт: {score}")
+    time_str = f"{total_time:.2f}"
     if score > 0:
         avg_time = total_time / score
+        avg_str = f"{avg_time:.2f}"
         print(
-            f"Время игры: {round(total_time)}"
-            f"секунд (среднее время: {round(avg_time)} сек.)"
+            f"Время игры: {time_str}"
+            f"секунд (среднее время: {avg_str} сек.)"
         )
     else:
-        print(f"Время игры: {round(total_time)} секунд")
+        print(f"Время игры: {time_str} секунд (среднее время: —)")
 
 
 def ask_and_check(word: str, correct: str) -> Tuple[bool, bool, float]:
@@ -121,9 +124,10 @@ def train_until_mistake(words: Dict[str, str]) -> None:
 
         if correct_word:
             score += 1
-            print(f"Верно! Время на ответ: {round(answer_time, 2)} секунд")
+            print(f"Верно! Всего очков: {score}"
+                  f"(ответ за {answer_time:.2f} секунд)")
         else:
-            print(f"Неправильно, правильный ответ: {correct}")
+            print(f"Ошибка! Неверно. Правильный ответ: {correct}")
             break
         print_statistics(score, total_time)
 
@@ -158,11 +162,11 @@ def show_all_words(words: dict) -> None:
     находящиеся в словаре
     """
     if not words:
-        print("Словарь пуст. Сначала добавьте слова (пункт 2).")
+        print()
         return
 
     parts = [f"{word} - {translation}" for word, translation in words.items()]
-    print("; ".join(parts) + ";")
+    print("; ".join(parts))
 
 
 def save_words(words: Dict[str, str], filename: str) -> None:
