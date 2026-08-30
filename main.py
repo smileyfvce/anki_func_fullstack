@@ -41,7 +41,7 @@ def print_statistics(score: int, total_time: float) -> None:
     if score > 0:
         avg_time = total_time / score
         print(
-            f"Время игры: {round(total_time)}" 
+            f"Время игры: {round(total_time)}"
             f"секунд (среднее время: {round(avg_time)} сек.)"
         )
     else:
@@ -91,7 +91,7 @@ def start_game(words: Dict[str, str]) -> None:
             print(f"Верно! Время на ответ: {round(answer_time, 2)} секунд")
         else:
             print(
-                f"Неправильно, правильный ответ: {correct}" 
+                f"Неправильно, правильный ответ: {correct}"
                 f"(Время на ответ: {round(answer_time, 2)} секунд)"
             )
     print_statistics(score, total_time)
@@ -177,6 +177,9 @@ def save_words(words: Dict[str, str], filename: str) -> None:
 
 
 def get_words_count(count: int) -> int:
+    """
+    Формирует правильный вывод текста
+    """
     if 11 <= count % 100 <= 19:
         return "слов"
     elif count % 10 == 1:
@@ -188,6 +191,9 @@ def get_words_count(count: int) -> int:
 
 
 def main() -> None:
+    """
+    Выводит меню приложения
+    """
     words_dict = load_words(FILENAME)
     count = len(words_dict)
     format_text = get_words_count(count)
