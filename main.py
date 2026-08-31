@@ -55,8 +55,7 @@ def print_statistics(score: int, total_time: float) -> None:
     if score > 0:
         avg_time = total_time / score
         avg_str = f"{avg_time:.2f}"
-        print(f"Время игры: {time_str} "
-              f"секунд (среднее время: {avg_str} сек.)")
+        print(f"Время игры: {time_str} секунд (среднее время: {avg_str} сек.)")
     else:
         print(f"Время игры: {time_str} секунд (среднее время: —)")
 
@@ -128,7 +127,7 @@ def train_until_mistake(words: Dict[str, str]) -> None:
         exit, correct_word, answer_time = ask_and_check(word, correct)
 
         if exit:
-            print("Спасибо за игру!")
+            print("Выход из режима по запросу пользователя.")
             break
         total_time += answer_time
 
