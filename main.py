@@ -103,7 +103,8 @@ def start_game(words: Dict[str, str]) -> None:
             print(f"Верно! Время на ответ: {round(answer_time, 2)} секунд")
         else:
             print(
-                f"Неправильно, правильный ответ: {correct} (Время на ответ: {round(answer_time, 2)} секунд)"
+                f"Неправильно, правильный ответ: {correct} "
+                f"(Время на ответ: {round(answer_time, 2)} секунд)"
             )
     print_statistics(score, total_time)
 
@@ -133,7 +134,9 @@ def train_until_mistake(words: Dict[str, str]) -> None:
         if correct_word:
             score += 1
             print(
-                f"Верно! Всего очков: {score} (ответ за {answer_time:.2f} секунд)")
+                f"Верно! Всего очков: {score} "
+                f"(ответ за {answer_time:.2f} секунд)"
+            )
         else:
             print(f"Ошибка! Неверно. Правильный ответ: {correct}")
             break
