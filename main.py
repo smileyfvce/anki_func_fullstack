@@ -18,14 +18,26 @@ def load_words(filename: str) -> Dict[str, str]:
         with open(filename, "r", encoding="utf-8") as file:
             for row in file:
                 line = row.strip()
-                if "," in line:
-                    parts = line.split(",", 1)
 
-                    if len(parts) == 2:
-                        word = parts[0].strip()
-                        translation = parts[1].strip()
-                        if word and translation:
-                            dictionary[word] = translation
+                if not line:
+                    continue
+
+                if "," not in line:
+                    continue
+
+                parts = line.split(",", 1)
+
+                if len(parts) != 2:
+                    continue
+
+                word = parts[0].strip()
+                translation = parts[1].strip()
+
+                if not word or not translation:
+                    continue
+
+                dictionary[word] = translation
+
         return dictionary
 
     except FileNotFoundError:
@@ -43,10 +55,8 @@ def print_statistics(score: int, total_time: float) -> None:
     if score > 0:
         avg_time = total_time / score
         avg_str = f"{avg_time:.2f}"
-        print(
-            f"Время игры: {time_str}"
-            f"секунд (среднее время: {avg_str} сек.)"
-        )
+        print(f"Время игры: {time_str} "
+              f"секунд (среднее время: {avg_str} сек.)")
     else:
         print(f"Время игры: {time_str} секунд (среднее время: —)")
 
@@ -129,7 +139,7 @@ def train_until_mistake(words: Dict[str, str]) -> None:
         else:
             print(f"Ошибка! Неверно. Правильный ответ: {correct}")
             break
-        print_statistics(score, total_time)
+    print_statistics(score, total_time)
 
 
 def add_words(words: Dict[str, str]) -> None:
