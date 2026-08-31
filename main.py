@@ -7,7 +7,7 @@ STOP_WORD = "СТОП"
 FILENAME = "words.txt"
 
 
-def load_words(filename: str) -> Dict[str, str]:
+def load_words(filename: str = FILENAME) -> Dict[str, str]:
     """
     Открывает файл со словами
     и формирует его в словарь
@@ -25,7 +25,7 @@ def load_words(filename: str) -> Dict[str, str]:
                 if "," not in line:
                     continue
 
-                parts = line.split(",", 1)
+                parts = line.split(",")
 
                 if len(parts) != 2:
                     continue
@@ -192,7 +192,7 @@ def save_words(words: Dict[str, str], filename: str) -> None:
     print(f"Было сохранено {count} слов в файл {filename}")
 
 
-def get_words_count(count: int) -> int:
+def get_words_count(count: int) -> str:
     """
     Формирует правильный вывод текста
     """
@@ -210,7 +210,7 @@ def main() -> None:
     """
     Выводит меню приложения
     """
-    words_dict = load_words(FILENAME)
+    words_dict = load_words()
     count = len(words_dict)
     format_text = get_words_count(count)
     print(f"Было загружено {count} {format_text} из файла {FILENAME}")
