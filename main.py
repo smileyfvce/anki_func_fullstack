@@ -50,7 +50,7 @@ def print_statistics(score: int, total_time: float) -> None:
     Выводит статистику игры:
     колличество правильных ответов и время
     """
-    print(f"Ваш итоговый счёт: {score}")
+    print(f"Ваш итоговый счет: {score}")
     time_str = f"{total_time:.2f}"
     if score > 0:
         avg_time = total_time / score
@@ -103,8 +103,7 @@ def start_game(words: Dict[str, str]) -> None:
             print(f"Верно! Время на ответ: {round(answer_time, 2)} секунд")
         else:
             print(
-                f"Неправильно, правильный ответ: {correct}"
-                f"(Время на ответ: {round(answer_time, 2)} секунд)"
+                f"Неправильно, правильный ответ: {correct} (Время на ответ: {round(answer_time, 2)} секунд)"
             )
     print_statistics(score, total_time)
 
@@ -133,8 +132,8 @@ def train_until_mistake(words: Dict[str, str]) -> None:
 
         if correct_word:
             score += 1
-            print(f"Верно! Всего очков: {score}"
-                  f"(ответ за {answer_time:.2f} секунд)")
+            print(
+                f"Верно! Всего очков: {score} (ответ за {answer_time:.2f} секунд)")
         else:
             print(f"Ошибка! Неверно. Правильный ответ: {correct}")
             break
@@ -145,6 +144,7 @@ def add_words(words: Dict[str, str]) -> None:
     """
     Добавляет новые пары ключ : значение
     """
+    print("Чтобы закончить, введите СТОП")
     while True:
 
         word_input = input("Введите слово:").strip()
@@ -220,7 +220,7 @@ def main() -> None:
         5. Выход
         """
         print(menu)
-        menu_choice = input("Пункт меню: ")
+        menu_choice = input("Пункт меню: ").strip()
 
         if menu_choice == "1":
             start_game(words_dict)
@@ -233,6 +233,8 @@ def main() -> None:
         elif menu_choice == "5":
             save_words(words_dict, FILENAME)
             break
+        else:
+            print("Неизвестный пункт меню")
 
 
 if __name__ == "__main__":
